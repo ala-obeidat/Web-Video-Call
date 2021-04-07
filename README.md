@@ -1,10 +1,10 @@
 # Video Chat Application
-* Deployed at https://desolate-depths-86299.herokuapp.com/
+* Deployed at https://alaobeidat.kt/
 * Only two persons can join in one room
 ## Running the app on development server
 * `npm install`
 * `node index.js`
-* open `localhost:8000`
+* open `localhost:3000`
 
 ## Obtaining TURN/STUN credentials using Xiysys
 * Do not use the credentials provided
