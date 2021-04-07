@@ -1,5 +1,5 @@
 # Video Chat Application
-* Deployed at https://alaobeidat.kt/
+* Deployed at https://alaobeidat.tk/
 * Only two persons can join in one room
 ## Running the app on development server
 * `npm install`
