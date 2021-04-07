@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Ala Obeidat</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600&family=Josefin+Slab&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+ 
+
+</head>
+
+<body class="h-100">
+  <div class="h-100" id="video_display" style="padding-left: 3px;">
+    <div class="controlles">
+      <button id="muteAudioBtn" class=" btn_option" onclick="muteAudio()">Mute Microphone</button>
+      <button id="muteVideoBtn" class=" btn_option" onclick="muteVideo()">Mute Video</button>
+    </div>
+    <div id ="video_container" class="align-items-center">
+      <div class="local_div" id="div1">
+				<video id="localVideo"  class="" autoplay muted playsinline></video>
+			</div>
+			<div class="remote_div" id="div2">
+				<video id="remoteVideo" class="" autoplay playsinline></video>
+			</div>
+    </div>
+    <button style="margin-top: 5px; font-size: 30px;" class=" btn-danger" onclick="hangup()">End Call</button>
+  </div>
+  
+  <div style="position: fixed;bottom: 5;background-color:black;color:white;clear:both;text-align:center;padding:5px;font-size: 50px;width: 100%;margin-top: 5px;">
+    Copy right :  Ala Obeidat @ 2021
+    </div>
+  
+
+  <!-- Import SocketIO for signalling -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Import WebRTC adapter for compatibility with all the browsers  -->
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  
+  <!-- Import TURN config -->
+  <script src="js\config.js"></script>
+
+  <!-- Import script containing WebRTC related functions -->
+  <script src="js\main.js"></script>
+  
+</body>
+
+</html>
