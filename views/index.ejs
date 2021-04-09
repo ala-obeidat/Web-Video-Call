@@ -27,7 +27,11 @@
     </div>
     <button style="margin-top: 5px; font-size: 30px;" class=" btn-danger" onclick="hangup()">End Call</button>
   </div>
-  
+  <div id="networkStatus">
+    <h1>Connection => <span id="status"></span> : <span id="speed"></span>
+    </h1> 
+    
+  </div>
   <div style="position: fixed;bottom: 5;background-color:black;color:white;clear:both;text-align:center;padding:5px;font-size: 50px;width: 100%;margin-top: 5px;">
     Copy right :  Ala Obeidat @ 2021
     </div>
@@ -44,6 +48,7 @@
 
   <!-- Import script containing WebRTC related functions -->
   <script src="js\main.js"></script>
+  <script src="js\network.js"></script>
   
 </body>
 

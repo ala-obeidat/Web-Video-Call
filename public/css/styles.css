@@ -1,10 +1,44 @@
+#networkStatus > *{
+	margin: 0 !important;
+	font-weight: bolder;
+}
+.speed-Excellent{
+	display: inline-block;
+	color: #fff;
+	background-color: #00ff00;
+}
+.result-Online{
+	display: inline-block;
+}
+.result-OFFline,.speed-No{
+	display: inline-block;
+	color: #fff;
+	background-color: darkred;
+}
+.speed-Good{
+	display: inline-block;
+	color: #fff;
+	background-color: #ffaa00;
+}
+.speed-Poor{
+	display: inline-block;
+	color: #fff;
+	background-color: #aa9900;
+}
+.speed-Slow{
+	display: inline-block;
+	color: #fff;
+	background-color: #aa1000;
+}
+
+
 *, ::after, ::before {
     box-sizing: border-box;
 }
 .btn_option {
 	display:inline-block;
 	font-size : 35px;
-	width: 32%;
+	width: 33%;
 	height: 100px;
 	color: #fff;
 	background-color: #119900;
