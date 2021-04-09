@@ -1,4 +1,4 @@
-const intervalToCheckInSeconds = 3;
+const intervalToCheckInSeconds = 10;
 const speedDisplay = document.getElementById("speed");
 const statusDisplay = document.getElementById("status");
 
@@ -20,7 +20,7 @@ const checkSlowConnection =  (seconds) => {
 const checkOnlineStatus = async () => {
   try {
   let countDownDate = new Date().getTime();
-    const online = await fetch("http://1x1px.me/FF4D00-0.8.png",{mode: "no-cors"});
+    const online = await fetch("https://drive.google.com/u/0/uc?id=1ecffjB-Rh-tLvn9O9lK59oczMYrznx1P&export=download",{mode: "no-cors"});
 	let newDate = new Date().getTime();
 	 let distance = newDate - countDownDate;
 	 let seconds = Math.floor((distance % (1000 * 60)) / 1000);
