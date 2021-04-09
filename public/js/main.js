@@ -25,7 +25,8 @@ var localStreamConstraints = {
 var room = prompt('Enter room name:');
 
 //Initializing socket.io
-var socket = io.connect();
+var socket = io.connect('https://alaobeidat.tk', {secure: true});
+
 
 if (room !== '') {
   socket.emit('create or join', room);
@@ -243,6 +244,42 @@ function muteAudio(){
 var _isVideo=true;
 var _videoBtn=document.getElementById('muteVideoBtn');
 var _audioBtn= document.getElementById('muteAudioBtn');
+
+const capture = async facingMode => {
+  const options = {
+    audio: false,
+    video: {
+      facingMode,
+    },
+  };
+
+  try {
+    if (localStream) {
+      const tracks = localStream.getTracks();
+      tracks.forEach(track => track.stop());
+    }
+    localStream = await navigator.mediaDevices.getUserMedia(options);
+  } catch (e) {
+    alert(e);
+    return;
+  }
+  localVideo.srcObject = null;
+  localVideo.srcObject = localStream;
+  localVideo.play();
+}
+var invirunment ='user';
+function flipCamera(){
+  const supports = navigator.mediaDevices.getSupportedConstraints();
+if (!supports['facingMode']) {
+    alert('This browser does not support facingMode!');
+    return;
+}
+if(invirunment=='user')
+invirunment='environment';
+else
+invirunment='user';
+capture(invirunment);
+}
 function muteVideo(){
   if(_isVideo)
  {
