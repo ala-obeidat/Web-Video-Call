@@ -1,6 +1,7 @@
 #networkStatus > *{
 	margin: 0 !important;
 	font-weight: bolder;
+	text-align: center;
 }
 .speed-Excellent{
 	display: inline-block;
