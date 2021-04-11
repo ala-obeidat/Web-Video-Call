@@ -101,7 +101,9 @@ console.log('Getting user media with constraints', localStreamConstraints);
 else{
   endTheCall()
 }
+var _callEnded=false;
 function endTheCall(){
+  _callEnded=true;
   sendMessage('bye', room);
   document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">Call Again</button>';
   document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>Thanks for Using Ala's products</h1>";

@@ -1,4 +1,4 @@
-const intervalToCheckInSeconds = 10;
+const intervalToCheckInSeconds = 5;
 const speedDisplay = document.getElementById("speed");
 const statusDisplay = document.getElementById("status");
 
@@ -30,15 +30,16 @@ const checkOnlineStatus = async () => {
   checkSlowConnection(-1);
     return false; // definitely offline
   }
+  finally{
+	  if(!_callEnded)
+		setTimeout(SetStatusDisplayContet,intervalToCheckInSeconds * 1000);
+  }
 };
 const SetStatusDisplayContet = async () => {
 let result= await checkOnlineStatus() ? "Online" : "OFFline";
 statusDisplay.textContent = result;
 statusDisplay.className = 'result-'+result;
 }
-setInterval(async () => { 
-  await SetStatusDisplayContet();
-}, intervalToCheckInSeconds * 1000); 
 
 // forgot to include async load event listener in the video! 
 window.addEventListener("load", async (event) => { 

@@ -1,3 +1,4 @@
+ 
 #networkStatus > *{
 	margin: 0 !important;
 	font-weight: bolder;
@@ -5,7 +6,7 @@
 }
 .speed-Excellent{
 	display: inline-block;
-	color: #fff;
+	color: #000;
 	background-color: #00ff00;
 }
 .result-Online{
