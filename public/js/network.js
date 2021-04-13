@@ -1,19 +1,27 @@
 const intervalToCheckInSeconds = 5;
-const speedDisplay = document.getElementById("speed");
-const statusDisplay = document.getElementById("status");
+const speedDisplay = document.getElementById("speed"); 
 
 const checkSlowConnection =  (seconds) => {  
     
 	let speed="Excellent";
+	let speedAr = 'ممتازة';
 	if(seconds > 1 && seconds < 3)
-		speed= "Good";
+		{speed= "Good";
+		speedAr = 'جيدة';
+	}
 	if(seconds > 3 && seconds < 10)
-		speed= "Poor";
+		{speed= "Poor";
+		speedAr = 'ضعيفة';}
 	if(seconds > 10)
-		speed= "Slow"; 
+		{speed= "Slow"; 
+		speedAr = 'ضعيفة جداً';
+	}
+
 	if(seconds < 0)
-		speed= "No"; 
-	speedDisplay.textContent = speed + ' Connection';
+		{speed= "No"; 
+		speedAr = 'انقطع الاتصال';
+	}
+	speedDisplay.textContent = speedAr;
     speedDisplay.className = 'speed-'+speed;
 }
 
@@ -36,9 +44,7 @@ const checkOnlineStatus = async () => {
   }
 };
 const SetStatusDisplayContet = async () => {
-let result= await checkOnlineStatus() ? "Online" : "OFFline";
-statusDisplay.textContent = result;
-statusDisplay.className = 'result-'+result;
+ await checkOnlineStatus()
 }
 
 // forgot to include async load event listener in the video! 

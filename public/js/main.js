@@ -11,7 +11,7 @@ var turnReady;
 
 //Initialize turn/stun server here
 var pcConfig = turnConfig;
-
+var shareBtn=document.getElementById('shareViaWhatsApp');
 var localStreamConstraints = {
     audio: true,
     video: true
@@ -26,8 +26,13 @@ var localStreamConstraints = {
 var room = '';
 const urlParams = new URLSearchParams(window.location.search);
 room = urlParams.get('room');
-if(!room)
-  room=prompt('Enter room name:'); 
+
+if(!room)  {
+  room=uuid();
+}
+else{
+  shareBtn.style='display:none';
+}
 //Initializing socket.io
 var socket =null;
 
@@ -35,27 +40,35 @@ var socket =null;
 if (room !== '' && room !== null) {
   socket=io.connect('https://alaobeidat.tk', {secure: true});
   socket.emit('create or join', room);
-  console.log('Attempted to create or  join room', room);
-document.getElementById('roomText').innerHTML=room;
+  console.log('Attempted to create or  join room', room); 
   socket.on('created', function(room) {
     console.log('Created room ' + room);
     isInitiator = true;
   });
   
   socket.on('full', function(room) {
+    alert('غرفة مغلقة');
     console.log('Room ' + room + ' is full');
   });
   
   socket.on('join', function (room){
     console.log('Another peer made a request to join room ' + room);
-    addInfo('Another user try to connect to your room');
+    addInfo('هناك شخص يحاول الانضام للمكالمة في هذه الغرفة');
     console.log('This peer is the initiator of room ' + room + '!');
     isChannelReady = true;
   });
+  socket.on('ready', function (room){
+    addInfo('تم إغلاق الغرفة');
+    shareBtn.style='display:none';
+  });
+
+ 
   
   socket.on('joined', function(room) {
     console.log('joined: ' + room);
     isChannelReady = true;
+    addInfo('تم انضمامك  للمكالمة'); 
+    shareBtn.style='display:none';
   });
   
   socket.on('log', function(array) {
@@ -93,6 +106,7 @@ document.getElementById('roomText').innerHTML=room;
   //Displaying Local Stream and Remote Stream on webpage
   var localVideo = document.querySelector('#localVideo');
   var remoteVideo = document.querySelector('#remoteVideo');
+
   console.log("Going to find Local media");
   navigator.mediaDevices.getUserMedia(localStreamConstraints)
   .then(gotStream)
@@ -111,14 +125,25 @@ var _callEnded=false;
 function endTheCall(){
   _callEnded=true;
   sendMessage('bye', room);
-  document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">Call Again</button>';
+  document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">معاودة الاتصال</button>';
   document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>Thanks for Using Ala's products</h1>";
   isChannelReady=false;
-
+  window.history.pushState({}, document.title, "https://alaobeidat.tk");
 }
+function uuid() {
+  var uuid = "", i, random;
+  for (i = 0; i < 32; i++) {
+    random = Math.random() * 16 | 0;
 
+    if (i == 8 || i == 12 || i == 16 || i == 20) {
+      uuid += "-";
+    }
+    uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+  }
+  return uuid;
+}
 function shareWhatsApp(){
-  window.open('whatsapp://send?text= Join Me for Video call via link https://alaobeidat.tk?room='+room); 
+  window.open('whatsapp://send?text= Join my room via link: https://alaobeidat.tk?room='+room); 
 
 }
 let infoItem =document.getElementById('info');
@@ -222,7 +247,7 @@ function doAnswer() {
 function setLocalAndSendMessage(sessionDescription) {
   pc.setLocalDescription(sessionDescription);
   console.log('setLocalAndSendMessage sending message', sessionDescription);
-  addInfo('User joined your room');
+  
   sendMessage(sessionDescription, room);
 }
 
@@ -246,7 +271,7 @@ function hangup() {
   localVideo.pause();
   stop();
   endTheCall();
-  alert('Call Ended'); 
+  alert('تم انهاء المكالمة'); 
   
 }
 
@@ -254,7 +279,7 @@ function handleRemoteHangup() {
   console.log('Session terminated.'); 
   stop();
   isInitiator = false;
-  alert('User end the call'); 
+  alert('قام الطرف الآخر بإنهاء المكالمة'); 
   endTheCall();
 }
 
@@ -268,10 +293,10 @@ var _isAudio=true;
 function muteAudio(){ 
   if(_isAudio)
   {
-    _audioBtn.innerHTML='Unmute Audio';
+    _audioBtn.innerHTML='اظهار الصوت';
   }
   else{
-    _audioBtn.innerHTML='Mute Audio';
+    _audioBtn.innerHTML='كتم الصوت';
   }
   _isAudio=!_isAudio;
   localStream.getAudioTracks()[0].enabled = _isAudio
@@ -301,30 +326,17 @@ const capture = async facingMode => {
   localVideo.srcObject = null;
   localVideo.srcObject = localStream;
   localVideo.play();
-}
-var invirunment ='user';
-function flipCamera(){
-  const supports = navigator.mediaDevices.getSupportedConstraints();
-if (!supports['facingMode']) {
-    alert('This browser does not support facingMode!');
-    return;
-}
-if(invirunment=='user')
-invirunment='environment';
-else
-invirunment='user';
-capture(invirunment);
-}
+} 
 function muteVideo(){
   if(_isVideo)
  {
      
-    _videoBtn.innerHTML='Unmute Video';
+    _videoBtn.innerHTML='عرض الفيديو';
 }
   else
 {
     
-  _videoBtn.innerHTML='Mute Video';
+  _videoBtn.innerHTML='إخفاء الفيديو';
 }
 _isVideo=!_isVideo;
 localStream.getVideoTracks()[0].enabled = _isVideo;
