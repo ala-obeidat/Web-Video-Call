@@ -22,7 +22,12 @@ var localStreamConstraints = {
 //var room = 'foo';
 
 // Prompting for room name:
-var room = prompt('Enter room name:'); 
+
+var room = '';
+const urlParams = new URLSearchParams(window.location.search);
+room = urlParams.get('room');
+if(!room)
+  room=prompt('Enter room name:'); 
 //Initializing socket.io
 var socket =null;
 
@@ -109,6 +114,11 @@ function endTheCall(){
   document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">Call Again</button>';
   document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>Thanks for Using Ala's products</h1>";
   isChannelReady=false;
+
+}
+
+function shareWhatsApp(){
+  window.open('whatsapp://send?text= Join Me for Video call via link https://alaobeidat.tk?room='+room); 
 
 }
 let infoItem =document.getElementById('info');

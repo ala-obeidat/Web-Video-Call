@@ -304,8 +304,9 @@ body {
 	}
 	
 	.btn-danger {
-		font-size : 20px;
-		width: 100%;
+		margin-top: 5px; 
+		font-size: 30px;
+		width: 49.5%;
 		height: 100px;
 		color: #fff;
 		background-color: #25274d;
