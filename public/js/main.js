@@ -43,6 +43,7 @@ document.getElementById('roomText').innerHTML=room;
   
   socket.on('join', function (room){
     console.log('Another peer made a request to join room ' + room);
+    addInfo('Another user try to connect to your room');
     console.log('This peer is the initiator of room ' + room + '!');
     isChannelReady = true;
   });
@@ -107,6 +108,14 @@ function endTheCall(){
   sendMessage('bye', room);
   document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">Call Again</button>';
   document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>Thanks for Using Ala's products</h1>";
+  isChannelReady=false;
+
+}
+let infoItem =document.getElementById('info');
+function addInfo(text){
+  var oldHtml=infoItem.innerHTML;
+  let newHtml=`${oldHtml}<br /><span>${text} ...</span>`;
+  infoItem.innerHTML=newHtml;
 }
 //Defining socket connections for signalling
 
@@ -203,6 +212,7 @@ function doAnswer() {
 function setLocalAndSendMessage(sessionDescription) {
   pc.setLocalDescription(sessionDescription);
   console.log('setLocalAndSendMessage sending message', sessionDescription);
+  addInfo('User joined your room');
   sendMessage(sessionDescription, room);
 }
 
