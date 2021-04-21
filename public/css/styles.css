@@ -1,4 +1,6 @@
- 
+#networkStatus {
+	display: none;
+} 
 #networkStatus > *{
 	margin: 0 !important;
 	font-weight: bolder;
@@ -38,13 +40,14 @@
     box-sizing: border-box;
 }
 .btn_option {
-	display:inline-block;
-	font-size : 35px;
-	width: 24.3%;
-	height: 100px;
-	color: #fff;
-	background-color: #119900;
-	border-color: #25274d;
+	display:inline;
+	font-size : 150px;
+	width: 24%; 
+    margin: 5px 2.9%;
+	color: #25274d;
+}
+.btn_option.active {
+	color: #fff; 
 }
 video {
 	-webkit-transform: scaleX(-1);
@@ -285,7 +288,7 @@ body {
 	}
 
 	#video_container {
-		height: 80%;
+		height: 95%;
 		position:relative;
 		display:flex;
 		flex-wrap:wrap

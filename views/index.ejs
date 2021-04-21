@@ -7,17 +7,12 @@
   <meta name="description" content="اتصال فيديو مجاني وآمن">
    <link rel="stylesheet" href="/css/styles.css">
   <meta charset="utf-8">
-
+  <script src="https://kit.fontawesome.com/35896a0ce6.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="h-100">
   <div class="h-100" id="video_display" style="padding-left: 3px;">
-    <div class="controlles">
-      <button id="muteAudioBtn" class="btn_option" onclick="muteAudio()">كتم الصوت</button>
-      <button id="muteVideoBtn" class="btn_option" onclick="muteVideo()">إخفاء الفيديو</button> 
-      <button   class="btn_option" onclick="hangup()">انهاء المكالمة</button>
-      <button id="shareViaWhatsApp" class="btn_option" onclick="shareWhatsApp()">مشاركة عبر الواتس أب</button>
-    </div>
+    
     <div id ="video_container" class="align-items-center">
       <div class="local_div" id="div1">
 				<video id="localVideo"  class="" autoplay muted playsinline></video>
@@ -26,16 +21,22 @@
 				<video id="remoteVideo" class="" autoplay playsinline></video>
 			</div>
     </div>
-   
+    <div class="controlles">
+      <a id="muteVideoBtn" class="btn_option active" href="javascript:muteVideo()" title="كتم الفيديو"><i id="muteVideoIcon" class="fas fa-video"></i></a>
+      <a id="muteAudioBtn" class="btn_option active" href="javascript:muteAudio()" title="كتم الصوت"><i id="muteAudioIcon" class="fas fa-microphone"></i></a>
+      <a class="btn_option " href="javascript:hangup()" title="إنهاء المكالمة"><i class="fas fa-phone-slash"></i></a>
+      <a id="shareViaWhatsApp" class="btn_option active" href="javascript:shareWhatsApp()" title="مشاركة بالواتس"><i class="fab fa-whatsapp"></i></a>
+     </div>
   </div>
   <div id="networkStatus">
     <h1>قوة الشبكة => <span id="speed"></span></h1>  
     <h1 id="info"></h1>
   </div>
-  <div style="position: fixed;bottom: 5;background-color:black;color:white;clear:both;text-align:center;padding:5px;font-size: 50px;width: 100%;margin-top: 5px;">
-    Copy right :  Ala Obeidat @ 2021
-    <br/>
-    نسخة تجريبية لصالح <b>أبو هادي</b>
+  <div id="callAgain">
+
+  </div>
+  <div style="position: fixed;bottom: 12px;background-color:black;color:white;clear:both;text-align:center;padding: 15px;font-size: 60px;margin: 0 auto;width: 100%;">
+    Copy right :  Ala Obeidat @ 2021 
     </div> 
 
   <!-- Import SocketIO for signalling -->

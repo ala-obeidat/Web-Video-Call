@@ -27,11 +27,14 @@ var room = '';
 const urlParams = new URLSearchParams(window.location.search);
 room = urlParams.get('room');
 
-if(!room)  {
-  room=uuid();
+if(room)  {
+  shareBtn.style='display:none';
 }
 else{
-  shareBtn.style='display:none';
+  room = prompt('ادخل رقم الغرفة،أو اتركها فارغة لإنشاء غرفة جديدة');
+  if(!room)
+  room=uuid();
+  
 }
 //Initializing socket.io
 var socket =null;
@@ -43,6 +46,7 @@ if (room !== '' && room !== null) {
   console.log('Attempted to create or  join room', room); 
   socket.on('created', function(room) {
     console.log('Created room ' + room);
+    addInfo('تم انشاء الغرفة رقم '+ room);
     isInitiator = true;
   });
   
@@ -125,23 +129,25 @@ var _callEnded=false;
 function endTheCall(){
   _callEnded=true;
   sendMessage('bye', room);
-  document.getElementById('networkStatus').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">معاودة الاتصال</button>';
-  document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>Thanks for Using Ala's products</h1>";
+  document.getElementById('callAgain').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">معاودة الاتصال</button>';
+  document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>شكراً لإستخدامك منتجات علاء عبيدات</h1>";
   isChannelReady=false;
   window.history.pushState({}, document.title, "https://alaobeidat.tk");
 }
 function uuid() {
-  var uuid = "", i, random;
-  for (i = 0; i < 32; i++) {
-    random = Math.random() * 16 | 0;
-
-    if (i == 8 || i == 12 || i == 16 || i == 20) {
-      uuid += "-";
-    }
-    uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
-  }
-  return uuid;
+  return makeid(6);
 }
+function makeid(length) {
+  var result           = [];
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result.push(characters.charAt(Math.floor(Math.random() * 
+charactersLength)));
+ }
+ return result.join('');
+}
+
 function shareWhatsApp(){
   window.open('whatsapp://send?text= Join my room via link: https://alaobeidat.tk?room='+room); 
 
@@ -293,17 +299,25 @@ var _isAudio=true;
 function muteAudio(){ 
   if(_isAudio)
   {
-    _audioBtn.innerHTML='اظهار الصوت';
+     
+    _audioIcon.className='fas fa-microphone-slash';
+    _audioBtn.className='btn_option';
+     
   }
-  else{
-    _audioBtn.innerHTML='كتم الصوت';
+    else
+  {
+    _audioIcon.className='fas fa-microphone';
+      _audioBtn.className='btn_option active';  
+   
   }
   _isAudio=!_isAudio;
   localStream.getAudioTracks()[0].enabled = _isAudio
 }
 var _isVideo=true;
 var _videoBtn=document.getElementById('muteVideoBtn');
+var _videoIcon = document.getElementById('muteVideoIcon');
 var _audioBtn= document.getElementById('muteAudioBtn');
+var _audioIcon= document.getElementById('muteAudioIcon');
 
 const capture = async facingMode => {
   const options = {
@@ -331,12 +345,15 @@ function muteVideo(){
   if(_isVideo)
  {
      
-    _videoBtn.innerHTML='عرض الفيديو';
+  _videoIcon.className='fas fa-video-slash';
+  _videoBtn.className='btn_option';
+   
 }
   else
 {
-    
-  _videoBtn.innerHTML='إخفاء الفيديو';
+  _videoBtn.className='btn_option active';
+    _videoIcon.className='fas fa-video';  
+ 
 }
 _isVideo=!_isVideo;
 localStream.getVideoTracks()[0].enabled = _isVideo;

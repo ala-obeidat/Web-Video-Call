@@ -48,6 +48,6 @@ const SetStatusDisplayContet = async () => {
 }
 
 // forgot to include async load event listener in the video! 
-window.addEventListener("load", async (event) => { 
-  await SetStatusDisplayContet();
-});
+// window.addEventListener("load", async (event) => { 
+//   await SetStatusDisplayContet();
+// });
