@@ -3,23 +3,34 @@
 //Loading dependencies & initializing express
 var os = require('os');
 var express = require('express');
+var fs = require('fs');
 var app = express();
+var https = require('https');
 var http = require('http');
+var privateKey  = fs.readFileSync('cer/private.key', 'utf8');
+var certificate = fs.readFileSync('cer/certificate.crt', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
 //For signalling in WebRTC
 var socketIO = require('socket.io');
 
 
 app.use(express.static('public'))
-
+app.enable('trust proxy')
+app.use((req, res, next) => {
+    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+})
 app.get("/", function(req, res){
 	res.render("index.ejs");
 });
 
 var server = http.createServer(app);
+var servers = https.createServer(credentials,app);
 
-server.listen(process.env.PORT || 3000);
+server.listen(80);
+servers.listen(443);
 
-var io = socketIO(server);
+var io = socketIO(servers);
 
 io.sockets.on('connection', function(socket) {
 

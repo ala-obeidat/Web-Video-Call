@@ -31,8 +31,8 @@ if(room)  {
   shareBtn.style='display:none';
 }
 else{
-  room = prompt('ادخل رقم الغرفة،أو اتركها فارغة لإنشاء غرفة جديدة');
-  if(!room)
+  //room = prompt('ادخل رقم الغرفة،أو اتركها فارغة لإنشاء غرفة جديدة');
+  //if(!room)
   room=uuid();
   
 }
