@@ -31,9 +31,7 @@ if(room)  {
   shareBtn.style='display:none';
 }
 else{
-  room = prompt('ادخل رقم الغرفة،أو اتركها فارغة لإنشاء غرفة جديدة');
-  if(!room)
-  room=uuid();
+  room = uuid();
   
 }
 //Initializing socket.io
@@ -135,11 +133,11 @@ function endTheCall(){
   window.history.pushState({}, document.title, baseUrl);
 }
 function uuid() {
-  return makeid(6);
+  return makeid(9);
 }
 function makeid(length) {
   var result           = [];
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   var charactersLength = characters.length;
   for ( var i = 0; i < length; i++ ) {
     result.push(characters.charAt(Math.floor(Math.random() * 
