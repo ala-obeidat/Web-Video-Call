@@ -1,5 +1,5 @@
 # Video Chat Application
-* Deployed at (Alfajer)[https://alfajer.herokuapp.com/]
+* Deployed at https://alfajer.herokuapp.com
 * Only two persons can join in one room
 ## Running the app on development server
 * `npm install`
