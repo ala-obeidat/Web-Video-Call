@@ -1,21 +1,21 @@
 'use strict';
 
 //Loading dependencies & initializing express
-import { networkInterfaces } from 'os';
-import express, { static } from 'express';
+var os = require('os');
+var express = require('express');
 var app = express();
-import { createServer } from 'http';
+var http = require('http');
 //For signalling in WebRTC
-import socketIO from 'socket.io';
+var socketIO = require('socket.io');
 
 
-app.use(static('public'))
+app.use(express.static('public'))
 
 app.get("/", function(req, res){
 	res.render("index.ejs");
 });
 
-var server = createServer(app);
+var server = http.createServer(app);
 
 server.listen(process.env.PORT || 3000);
 
@@ -64,7 +64,7 @@ io.sockets.on('connection', function(socket) {
 	});
   
 	socket.on('ipaddr', function() {
-	  var ifaces = networkInterfaces();
+	  var ifaces = os.networkInterfaces();
 	  for (var dev in ifaces) {
 		ifaces[dev].forEach(function(details) {
 		  if (details.family === 'IPv4' && details.address !== '127.0.0.1') {
