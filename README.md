@@ -2,8 +2,9 @@
 * Deployed at https://alfajer.herokuapp.com
 * Only two persons can join in one room
 ## Running the app on development server
-* `npm install`
-* `node index.js`
+* `npm init`
+* `npm i`
+* `node start`
 * open `localhost:3000`
 
 ## Obtaining TURN/STUN credentials using Xiysys
