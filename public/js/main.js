@@ -41,7 +41,7 @@ var socket =null;
 
 
 if (room !== '' && room !== null) {
-  socket=io.connect('https://alaobeidat.tk', {secure: true});
+  socket=io.connect(baseUrl, {secure: true});
   socket.emit('create or join', room);
   console.log('Attempted to create or  join room', room); 
   socket.on('created', function(room) {
