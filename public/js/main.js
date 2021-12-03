@@ -1,5 +1,5 @@
 'use strict';
-
+var baseUrl=window.location.origin;
 //Defining some global utility variables
 var isChannelReady = false;
 var isInitiator = false;
@@ -132,7 +132,7 @@ function endTheCall(){
   document.getElementById('callAgain').innerHTML='<button onclick="location.reload()" style="font-size: 135px;  margin: 26px !important; width: 100%;  border-radius: 104px;">معاودة الاتصال</button>';
   document.getElementById('video_display').innerHTML="<h1 style='font-size:65px'>شكراً لإستخدامك منتجات علاء عبيدات</h1>";
   isChannelReady=false;
-  window.history.pushState({}, document.title, "https://alaobeidat.tk");
+  window.history.pushState({}, document.title, baseUrl);
 }
 function uuid() {
   return makeid(6);
@@ -149,7 +149,7 @@ charactersLength)));
 }
 
 function shareWhatsApp(){
-  window.open('whatsapp://send?text= Join my room via link: https://alaobeidat.tk?room='+room); 
+  window.open('whatsapp://send?text= Join my room via link: '+baseUrl+'?room='+room); 
 
 }
 let infoItem =document.getElementById('info');
