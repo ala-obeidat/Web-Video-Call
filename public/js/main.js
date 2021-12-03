@@ -154,9 +154,7 @@ function shareWhatsApp(){
 }
 let infoItem =document.getElementById('info');
 function addInfo(text){
-  var oldHtml=infoItem.innerHTML;
-  let newHtml=`${oldHtml}<br /><span>${text} ...</span>`;
-  infoItem.innerHTML=newHtml;
+console.log(text);
 }
 //Defining socket connections for signalling
 
