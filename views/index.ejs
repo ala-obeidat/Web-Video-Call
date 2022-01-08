@@ -10,7 +10,7 @@
   <script src="https://kit.fontawesome.com/35896a0ce6.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="h-100">
+<body class="h-100" onload="initCall()">
   <div class="h-100" id="video_display" style="padding-left: 3px;">
     
     <div id ="video_container" class="align-items-center">
@@ -32,7 +32,7 @@
 
   </div>
   <div style="position: fixed;bottom: 12px;background-color:black;color:white;clear:both;text-align:center;padding: 15px;font-size: 60px;margin: 0 auto;width: 100%;">
-    Copy right :  Ala Obeidat @ 2021 
+    Copy right :  Ala Obeidat @ 2022 
     </div> 
 
   <!-- Import SocketIO for signalling -->
@@ -45,7 +45,8 @@
   <script src="js\config.js"></script>
 
   <!-- Import script containing WebRTC related functions -->
-  <script src="js\main.js"></script>
+  <script src="js\call.js"></script>
+  <script src="js\feature.js"></script>
   
 </body>
 
